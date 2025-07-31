@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 
@@ -86,12 +84,7 @@ const Index = () => {
     }
   ];
 
-  const userStats = {
-    completedCourses: 12,
-    totalHours: 89,
-    currentStreak: 15,
-    joinDate: '2023-03-15'
-  };
+
 
   const filteredCourses = courses.filter(course => {
     const difficultyMatch = selectedDifficulty === 'all' || course.difficulty === selectedDifficulty;
@@ -190,7 +183,8 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
-              <Card key={course.id} className="group hover:shadow-lg transition-all duration-300 hover:border-primary/50 cursor-pointer">
+              <Link key={course.id} to={`/course/${course.id}`}>
+                <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/50 cursor-pointer">
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -230,135 +224,14 @@ const Index = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* User Profile */}
-      <section className="py-12 px-4 border-t border-border bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Profile Card */}
-            <Card className="lg:col-span-1">
-              <CardHeader className="text-center pb-4">
-                <Avatar className="w-20 h-20 mx-auto mb-4">
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="Profile" />
-                  <AvatarFallback className="text-xl bg-primary text-primary-foreground">
-                    W
-                  </AvatarFallback>
-                </Avatar>
-                <CardTitle className="text-xl">w0vz</CardTitle>
-                <Badge variant="secondary" className="w-fit mx-auto">
-                  Разработчик
-                </Badge>
-                <p className="text-sm text-muted-foreground mt-2">
-                  На платформе с {new Date(userStats.joinDate).toLocaleDateString('ru-RU', { 
-                    year: 'numeric', 
-                    month: 'long' 
-                  })}
-                </p>
-              </CardHeader>
-            </Card>
 
-            {/* Stats Cards */}
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      Завершено курсов
-                    </CardTitle>
-                    <Icon name="Award" size={16} className="text-primary" />
-                  </div>
-                  <div className="text-3xl font-bold text-primary">
-                    {userStats.completedCourses}
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      Часов обучения
-                    </CardTitle>
-                    <Icon name="Clock" size={16} className="text-primary" />
-                  </div>
-                  <div className="text-3xl font-bold text-primary">
-                    {userStats.totalHours}
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      Дней подряд
-                    </CardTitle>
-                    <Icon name="Flame" size={16} className="text-orange-500" />
-                  </div>
-                  <div className="text-3xl font-bold text-orange-500">
-                    {userStats.currentStreak}
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      Прогресс месяца
-                    </CardTitle>
-                    <Icon name="TrendingUp" size={16} className="text-primary" />
-                  </div>
-                  <div className="text-3xl font-bold text-primary mb-2">
-                    76%
-                  </div>
-                  <Progress value={76} className="h-2" />
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-12 px-4 border-t border-border">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-semibold mb-8">Связаться со мной</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/50 cursor-pointer">
-              <CardHeader className="text-center">
-                <div className="p-4 rounded-lg bg-blue-500/10 w-fit mx-auto mb-4 group-hover:bg-blue-500/20 transition-colors">
-                  <Icon name="MessageCircle" size={32} className="text-blue-500" />
-                </div>
-                <CardTitle className="flex items-center justify-center gap-2">
-                  Telegram
-                  <Icon name="ExternalLink" size={16} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </CardTitle>
-                <p className="text-muted-foreground">@w0vz</p>
-              </CardHeader>
-            </Card>
-
-            <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary/50 cursor-pointer">
-              <CardHeader className="text-center">
-                <div className="p-4 rounded-lg bg-foreground/10 w-fit mx-auto mb-4 group-hover:bg-foreground/20 transition-colors">
-                  <Icon name="Github" size={32} className="text-foreground" />
-                </div>
-                <CardTitle className="flex items-center justify-center gap-2">
-                  GitHub
-                  <Icon name="ExternalLink" size={16} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </CardTitle>
-                <p className="text-muted-foreground">Мои проекты</p>
-              </CardHeader>
-            </Card>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
