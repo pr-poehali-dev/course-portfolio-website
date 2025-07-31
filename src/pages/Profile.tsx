@@ -13,7 +13,11 @@ const Profile = () => {
     joinDate: '2023-03-15',
     skillLevel: 'Продвинутый',
     achievements: 8,
-    certificatesEarned: 5
+    certificatesEarned: 5,
+    role: 'Разработчик',
+    roleDescription: 'Senior Full-Stack Developer',
+    specialization: ['React', 'TypeScript', 'Node.js', 'Python'],
+    experience: '5+ лет'
   };
 
   const recentCourses = [
@@ -66,13 +70,36 @@ const Profile = () => {
                 
                 <div className="text-center md:text-left flex-1">
                   <h1 className="text-3xl font-bold mb-2">w0vz</h1>
-                  <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-3">
-                    <Badge variant="secondary">Разработчик</Badge>
-                    <Badge variant="outline" className="text-primary border-primary/30">
-                      {userStats.skillLevel}
-                    </Badge>
+                  
+                  {/* Enhanced Role Display */}
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-2">
+                      <Badge className="bg-primary/20 text-primary border-primary/30 text-base px-3 py-1">
+                        <Icon name="Code" size={16} className="mr-2" />
+                        {userStats.role}
+                      </Badge>
+                      <Badge variant="outline" className="text-primary border-primary/30">
+                        {userStats.skillLevel}
+                      </Badge>
+                      <Badge variant="secondary" className="text-xs">
+                        {userStats.experience}
+                      </Badge>
+                    </div>
+                    
+                    <p className="text-muted-foreground font-medium mb-2">
+                      {userStats.roleDescription}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-1 justify-center md:justify-start">
+                      {userStats.specialization.map((tech, index) => (
+                        <span key={index} className="text-xs bg-muted/50 text-muted-foreground px-2 py-1 rounded">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <p className="text-muted-foreground">
+                  
+                  <p className="text-muted-foreground text-sm">
                     На платформе с {new Date(userStats.joinDate).toLocaleDateString('ru-RU', { 
                       year: 'numeric', 
                       month: 'long',

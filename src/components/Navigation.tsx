@@ -43,6 +43,13 @@ const Navigation = () => {
                 </Button>
               </Link>
             ))}
+            
+            <Link to="/auth">
+              <Button variant="outline" size="sm" className="gap-2 ml-2">
+                <Icon name="LogIn" size={16} />
+                Войти
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Navigation */}
@@ -58,6 +65,12 @@ const Navigation = () => {
                 </Button>
               </Link>
             ))}
+            
+            <Link to="/auth">
+              <Button variant="outline" size="sm" className="p-2 ml-1">
+                <Icon name="LogIn" size={18} />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
